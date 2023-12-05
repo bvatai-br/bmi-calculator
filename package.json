@@ -23,7 +23,7 @@
     "deploy": "gh-pages -d build",
     "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
     "report-coverage": "cat ./coverage/lcov.info | codecov",
-    "cypress": "cypress open"
+    "cypress": "cypress run --headless"
   },
   "jest": {
     "collectCoverageFrom": [
