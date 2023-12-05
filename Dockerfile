@@ -6,7 +6,7 @@
 
 ARG NODE_VERSION=21.1.0
 
-FROM node:${NODE_VERSION}-alpine
+FROM node:${NODE_VERSION}-alpine as builder
 
 # Use production node environment by default.
 ENV NODE_ENV production
@@ -26,11 +26,15 @@ RUN --mount=type=bind,source=package.json,target=package.json \
 # Run the application as a non-root user.
 USER node
 
+FROM node:${NODE_VERSION}-alpine
+WORKDIR /usr/src/app
+
 # Copy the rest of the source files into the image.
-COPY . .
+COPY --from=builder . .
 
 # Expose the port that the application listens on.
 EXPOSE 3000
 
 # Run the application.
 CMD NODE_OPTIONS=--openssl-legacy-provider npm start
+
