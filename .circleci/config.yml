@@ -9,10 +9,10 @@ jobs:
     - restore_cache:
         name: Restore  NPM Package Cache
         keys:
-        - npm-packages2-{{ checksum "package-lock.json" }}
-    - run: npm ci --prefer-offline --no-audit
+        - npm-packages3-{{ checksum "package-lock.json" }}
+    - run: npm i
     - save_cache:
         name: Save NPM Package Cache
-        key: npm-packages2-{{ checksum "package-lock.json" }}
+        key: npm-packages3-{{ checksum "package-lock.json" }}
         paths:
         - node_modules
