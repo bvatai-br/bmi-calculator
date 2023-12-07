@@ -6,4 +6,13 @@ jobs:
     steps:
     - checkout
     - run: npm version
-    
+    - restore_cache:
+        name: Restore  NPM Package Cache
+        keys:
+        - npm-packages-{{ checksum "packages.lock" }}
+    - run: npm ci --prefer-offline --no-audit
+    - save_cache:
+        name: Save NPM Package Cache
+        key: npm-packages-{{ checksum "packages.lock" }}
+        paths:
+        - .node_modules
