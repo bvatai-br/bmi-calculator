@@ -15,4 +15,4 @@ jobs:
         name: Save NPM Package Cache
         key: npm-packages-{{ checksum "package-lock.json" }}
         paths:
-        - .node_modules
+        - node_modules
